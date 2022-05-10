@@ -6,8 +6,12 @@
     "format": "npm run prettier -- --write",
     "format:check": "npm run prettier -- --check",
     "prettier": "prettier \".\"",
-    "test": "jest"
+    "prepare": "husky install"
   },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pherval/fullcycle-teste.git"
@@ -19,6 +23,12 @@
   },
   "homepage": "https://github.com/pherval/fullcycle-teste#readme",
   "devDependencies": {
-    "prettier": "^2.6.2"
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2",
+    "turbo": "^1.2.8"
+  },
+  "lint-staged": {
+    "*": "npm run format -- --ignore-unknown"
   }
 }
