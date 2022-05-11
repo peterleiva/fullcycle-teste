@@ -15,7 +15,7 @@ npm install
 para rodar o backend e frontend ao mesmo tempo é necessário definir uma variável de ambiente para frontend reconhecer o endpoint do backend
 
 ```bash
-REACT_APP_API_URL="http://localhost:9000" npx turbo run dev
+REACT_APP_API_URL="http://localhost:3001" npx turbo run dev
 ```
 
 ## Docker
