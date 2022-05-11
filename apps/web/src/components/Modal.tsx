@@ -48,7 +48,7 @@ export default function Modal({
       <header className="p-4 bg-sky-400 text-gray-50 font-bold flex justify-between items-center gap-5">
         <h1>{title}</h1>
         <IconButton size="lg" onClick={minimizeHandler}>
-          {minimized ? <MinimizeIcon /> : <MaximizeIcon />}
+          {minimized ? <MaximizeIcon /> : <MinimizeIcon />}
         </IconButton>
       </header>
       {!minimized && (
