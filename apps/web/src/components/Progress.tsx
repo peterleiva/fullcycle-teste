@@ -9,7 +9,7 @@ export default function Progress({
   ...progressProps
 }: ProgressProps) {
   return (
-    <div className="flex flex-row items-center gap-3">
+    <div className="flex flex-row flex-wrap items-center gap-3">
       <progress
         id={label}
         className="bg-sky-500 text-sky-400"
