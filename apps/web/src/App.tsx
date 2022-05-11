@@ -1,17 +1,23 @@
+import ReactLoading from "react-loading";
 import clsx from "clsx";
-import { Dropzone, DropzoneContent, Button, Progress } from "./components";
+import {
+  Dropzone,
+  DropzoneContent,
+  Button,
+  Progress,
+  Modal,
+  UploaderProgress,
+  PageHeader,
+} from "./components";
 import {
   VscFolderOpened as DropIcon,
   VscFolder as DragIcon,
 } from "react-icons/vsc";
-import ReactLoading from "react-loading";
 import {
   MdOutlineDone as DoneIcon,
   MdErrorOutline as FailedIcon,
 } from "react-icons/md";
-import { useFileUploader } from "./services";
-import Modal from "./components/Modal";
-import FileWithProgress from "./services/uploader/FileWithProgress";
+import { useFileUploader, type FileWithProgress } from "./services";
 
 function App() {
   const {
@@ -38,10 +44,10 @@ function App() {
 
   return (
     <div className="m-20">
-      <PageTitle
+      <PageHeader
         className="mb-10"
         title="File Uploader"
-        description="Inicie upando seus arquivos."
+        description="Get started uploading your files."
       />
       <Dropzone
         renderDragActive={
@@ -54,16 +60,15 @@ function App() {
             <Button className="self-center">Browse files</Button>
           </DropzoneContent>
         }
-        onDrop={(files) => {
-          enqueue(...files);
-        }}
+        onDrop={(files) => enqueue(...files)}
       />
       {files.length > 0 && (
-        <div className="flex mb-4 p-2 bg-sky-100 w-2/3 mx-auto justify-center">
-          <Progress max={total} value={loaded}>
-            {done ? <DoneIcon /> : Math.round((loaded / total) * 100) + "%"}
-          </Progress>
-        </div>
+        <UploaderProgress
+          loaded={loaded}
+          total={total}
+          done={done}
+          className="mb-4 w-2/3"
+        />
       )}
 
       <Modal title={`File upload progress (${files.length})`}>
@@ -105,20 +110,5 @@ function App() {
     </div>
   );
 }
-
-interface PageTitleProps {
-  title: string;
-  description?: string;
-  className?: string;
-}
-
-const PageTitle = ({ title, description, className }: PageTitleProps) => {
-  return (
-    <header className={clsx("text-center", className)}>
-      <h1 className="text-2xl font-bold">{title}</h1>
-      {description && <p className="mt-2">{description}</p>}
-    </header>
-  );
-};
 
 export default App;
