@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- web: minimize/maximize modal clicking the header instead of only button icon
+
 ### Fixed
 
 - Run in dev mode using Docker Compose
+
+### Changed
+
+- web: move upload related functionaly to its own module
 
 ## [0.3.0] - 2022-05-11
 

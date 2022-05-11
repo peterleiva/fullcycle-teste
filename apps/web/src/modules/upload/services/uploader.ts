@@ -1,4 +1,4 @@
-import { httpClientFactory } from "../../lib";
+import { httpClientFactory } from "../../../lib";
 
 type onUploadProgressHandler = {
   (progressEvent: any): void;
