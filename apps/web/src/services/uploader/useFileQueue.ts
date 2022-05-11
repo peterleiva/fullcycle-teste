@@ -2,12 +2,6 @@ import { useCallback, useReducer } from "react";
 import { remove, concat, head } from "ramda";
 import FileWithProgress from "./FileWithProgress";
 
-export type Progress = {
-  total: number;
-  loaded: number;
-  done: boolean;
-};
-
 type Action =
   | { type: "ENQUEUE"; data: FileWithProgress[] }
   | { type: "NEXT" }

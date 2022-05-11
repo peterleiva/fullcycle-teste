@@ -4,9 +4,14 @@ import {
   VscFolderOpened as DropIcon,
   VscFolder as DragIcon,
 } from "react-icons/vsc";
-import { MdOutlineDone as DoneIcon } from "react-icons/md";
+import ReactLoading from "react-loading";
+import {
+  MdOutlineDone as DoneIcon,
+  MdErrorOutline as FailedIcon,
+} from "react-icons/md";
 import { useFileUploader } from "./services";
 import Modal from "./components/Modal";
+import FileWithProgress from "./services/uploader/FileWithProgress";
 
 function App() {
   const {
@@ -18,6 +23,18 @@ function App() {
     progress: { total, loaded, done },
     status,
   } = useFileUploader();
+
+  const getIcon = (file: FileWithProgress) => {
+    return file.progress.error ? (
+      <FailedIcon />
+    ) : file.progress.done ? (
+      <DoneIcon />
+    ) : (
+      file.file === current?.file && (
+        <ReactLoading type="spin" color="#000000" width={20} height={20} />
+      )
+    );
+  };
 
   return (
     <div className="m-20">
@@ -51,17 +68,27 @@ function App() {
 
       <Modal title={`File upload progress (${files.length})`}>
         <div className="flex flex-col gap-4">
-          {files.map(({ file, progress: fileProgress }, index) => (
-            <Progress
-              key={file.name + index}
-              max={file === current?.file ? status?.total : fileProgress.total}
-              value={
-                file === current?.file ? status?.loaded : fileProgress.loaded
-              }
-            >
-              {file.name}
-            </Progress>
-          ))}
+          {files.map((currentFile, index) => {
+            const { file, progress: fileProgress } = currentFile;
+
+            return (
+              <div className="flex items-center gap-2" key={file.name + index}>
+                {getIcon(currentFile)}
+                <Progress
+                  max={
+                    file === current?.file ? status?.total : fileProgress.total
+                  }
+                  value={
+                    file === current?.file
+                      ? status?.loaded
+                      : fileProgress.loaded
+                  }
+                >
+                  {file.name}
+                </Progress>
+              </div>
+            );
+          })}
 
           {processed.length > 0 && (
             <Button

@@ -1,4 +1,9 @@
-import type { Progress } from "./useFileQueue";
+export type Progress = {
+  total: number;
+  loaded: number;
+  done: boolean;
+  error: boolean;
+};
 
 export default class FileWithProgress {
   private _progress: Progress;
@@ -6,10 +11,15 @@ export default class FileWithProgress {
 
   constructor(
     file: File,
-    { total = Infinity, loaded = 0, done = false }: Partial<Progress> = {}
+    {
+      total = Infinity,
+      loaded = 0,
+      done = false,
+      error = false,
+    }: Partial<Progress> = {}
   ) {
     this._file = file;
-    this._progress = { total, loaded, done };
+    this._progress = { total, loaded, done, error };
   }
 
   get progress() {
@@ -21,6 +31,8 @@ export default class FileWithProgress {
   }
 
   isDone() {
-    return this._progress.total - this._progress.loaded <= 0;
+    return (
+      !this._progress.error && this._progress.total - this._progress.loaded <= 0
+    );
   }
 }

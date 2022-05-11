@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { type Progress } from "./FileWithProgress";
 import { uploadFile } from "./uploader";
-import useFileQueue, { type Progress } from "./useFileQueue";
+import useFileQueue from "./useFileQueue";
 
 type Options = {
   onProgress: (event: Progress) => void;
@@ -15,15 +16,21 @@ export default function useFileUploader({ onProgress }: Partial<Options> = {}) {
   useEffect(() => {
     (async () => {
       if (current) {
-        await uploadFile(current.file, (event: ProgressEvent) => {
-          current.progress.loaded = event.loaded;
-          current.progress.total = event.total;
+        try {
+          await uploadFile(current.file, (event: ProgressEvent) => {
+            current.progress.loaded = event.loaded;
+            current.progress.total = event.total;
 
-          setStatus((progress) => ({ ...progress, ...current.progress }));
-        });
+            setStatus((progress) => ({ ...progress, ...current.progress }));
+          });
 
-        if (current.isDone()) {
-          dequeue();
+          if (current.isDone()) {
+            current.progress.done = true;
+            dequeue();
+          }
+        } catch (error) {
+          current.progress.error = true;
+          console.error(error);
         }
       }
     })();
