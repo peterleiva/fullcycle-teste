@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- web: Modal show list of uploaded/uploading files
+- web: Modal minimezable
+- web: clear processed files
+
 ## [0.2.0] - 2022-05-11
 
 ### Added
