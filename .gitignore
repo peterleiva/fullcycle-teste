@@ -110,3 +110,6 @@ dist/**
 
 # Mac OSX data
 .DS_Store
+
+# upload folder
+apps/server/uploads
