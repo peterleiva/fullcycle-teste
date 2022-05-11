@@ -17,3 +17,11 @@ para rodar o backend e frontend ao mesmo tempo é necessário definir uma variá
 ```bash
 REACT_APP_API_URL="http://localhost:9000" npx turbo run dev
 ```
+
+## Docker
+
+### Rode localmente usando Docker Compose
+
+```bash
+docker-compose up
+```

@@ -17,7 +17,7 @@ services:
     environment:
       NODE_ENV: "development"
       PORT: 3000
-      REACT_APP_API_URL: "http://api:3001/"
+      REACT_APP_API_URL: "http://localhost:3001/"
 
     volumes:
       - ./apps/web:/home/node/app
