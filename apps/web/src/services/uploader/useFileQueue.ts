@@ -1,6 +1,5 @@
 import { useCallback, useReducer } from "react";
 import { remove, concat, head } from "ramda";
-import invariant from "invariant";
 
 type IFile = FileWithProgress;
 

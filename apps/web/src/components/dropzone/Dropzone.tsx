@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import {
   type DropEvent,
   useDropzone,
