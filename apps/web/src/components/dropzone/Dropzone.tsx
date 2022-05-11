@@ -8,9 +8,10 @@ import {
 interface DropzoneProps {
   renderDragActive?: React.ReactNode;
   renderContent?: React.ReactNode;
+  onDrop?: onDropHandler;
 }
 
-type onDropCallback = <T extends File>(
+type onDropHandler = <T extends File>(
   acceptedFiles: T[],
   fileRejections: FileRejection[],
   event: DropEvent
@@ -19,11 +20,8 @@ type onDropCallback = <T extends File>(
 export default function Dropzone({
   renderDragActive,
   renderContent,
+  onDrop,
 }: DropzoneProps) {
-  const onDrop: onDropCallback = useCallback((files) => {
-    console.log(files);
-  }, []);
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
