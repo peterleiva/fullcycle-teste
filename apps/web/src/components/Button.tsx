@@ -121,7 +121,7 @@ export function IconButton({
       transition={{ duration: 0.15 }}
       className={clsx(
         "border-box border-0 outline-none text-lg cursor-pointer flex items-center justify-center",
-        "hover:after:bg-slate-300 after:p-4 after:duration-200 after:transition-colors after:rounded-[100%] after:absolute after:-z-10",
+        "hover:after:bg-slate-100 after:p-4 after:duration-200 after:transition-colors after:rounded-[100%] after:absolute after:-z-10",
         className
       )}
       style={{
