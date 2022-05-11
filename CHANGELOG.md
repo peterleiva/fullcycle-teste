@@ -7,12 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2022-05-11
+
 ### Added
 
+- Docker compose files
 - server: /upload endpoint to upload single files to server disk storage
 - server: Dockerfile
 - web: Dockerfile
-- Docker compose files
+- web: dropzone component to receive array of files
+- web: Button component
+- web: Progress component
+- web: upload file queue to server showing the progress for current process
 
 ## [0.1.0] - 2022-05-11
 
@@ -25,5 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - lint-staged
 - husky
 
-[unreleased]: https://github.com/pherval/fullcycle-teste/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/pherval/fullcycle-teste/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/pherval/fullcycle-teste/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/pherval/fullcycle-teste/releases/tag/v0.1.0
