@@ -45,9 +45,12 @@ export default function Modal({
         positions[position]
       )}
     >
-      <header className="p-4 bg-sky-400 text-gray-50 font-bold flex justify-between items-center gap-5">
+      <header
+        className="p-4 bg-sky-400 text-gray-50 font-bold flex justify-between items-center gap-5 pointer"
+        onClick={minimizeHandler}
+      >
         <h1>{title}</h1>
-        <IconButton size="lg" onClick={minimizeHandler}>
+        <IconButton size="lg">
           {minimized ? <MaximizeIcon /> : <MinimizeIcon />}
         </IconButton>
       </header>
