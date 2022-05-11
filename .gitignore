@@ -107,3 +107,6 @@ dist
 .turbo
 build/**
 dist/**
+
+# Mac OSX data
+.DS_Store
