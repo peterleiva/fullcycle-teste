@@ -10,7 +10,9 @@
     "@types/node": "^16.11.33",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.3",
+    "axios": "^0.27.2",
     "clsx": "^1.1.1",
+    "ramda": "^0.28.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-dropzone": "^14.2.1",
@@ -44,6 +46,8 @@
     ]
   },
   "devDependencies": {
+    "@types/invariant": "^2.2.35",
+    "@types/ramda": "^0.28.12",
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24"
