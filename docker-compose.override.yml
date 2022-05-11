@@ -1,0 +1,28 @@
+services:
+  api:
+    command: npm run dev
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: "development"
+      PORT: 3001
+    volumes:
+      - ./apps/server:/home/node/app
+      - api_node_modules:/home/node/app/node_modules
+
+  web:
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: "development"
+      PORT: 3000
+      REACT_APP_API_URL: "http://api:3001/"
+
+    volumes:
+      - ./apps/web:/home/node/app
+      - web_node_modules:/home/node/app/node_modules
+
+volumes:
+  web_node_modules:
+  api_node_modules:
