@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - server: /upload endpoint to upload single files to server disk storage
+- server: Dockerfile
 
 ## [0.1.0] - 2022-05-11
 
