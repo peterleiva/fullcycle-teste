@@ -49,7 +49,7 @@ function App() {
         </div>
       )}
 
-      <Modal title="File upload progress">
+      <Modal title={`File upload progress (${files.length})`}>
         <div className="flex flex-col gap-4">
           {files.map(({ file, progress: fileProgress }, index) => (
             <Progress
