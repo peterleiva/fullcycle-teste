@@ -6,12 +6,15 @@ import {
 } from "react-icons/vsc";
 import { MdOutlineDone as DoneIcon } from "react-icons/md";
 import { useFileUploader } from "./services";
+import Modal from "./components/Modal";
 
 function App() {
   const {
     enqueue,
     current,
     files,
+    cleanup,
+    processed,
     progress: { total, loaded, done },
     status,
   } = useFileUploader();
@@ -46,19 +49,32 @@ function App() {
         </div>
       )}
 
-      <div>
-        {files.map(({ file, progress: fileProgress }, index) => (
-          <Progress
-            key={file.name + index}
-            max={file === current?.file ? status?.total : fileProgress.total}
-            value={
-              file === current?.file ? status?.loaded : fileProgress.loaded
-            }
-          >
-            {file.name}
-          </Progress>
-        ))}
-      </div>
+      <Modal title="File upload progress">
+        <div className="flex flex-col gap-4">
+          {files.map(({ file, progress: fileProgress }, index) => (
+            <Progress
+              key={file.name + index}
+              max={file === current?.file ? status?.total : fileProgress.total}
+              value={
+                file === current?.file ? status?.loaded : fileProgress.loaded
+              }
+            >
+              {file.name}
+            </Progress>
+          ))}
+
+          {processed.length > 0 && (
+            <Button
+              variant="outlined"
+              size="sm"
+              onClick={cleanup}
+              className="self-start"
+            >
+              clear
+            </Button>
+          )}
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import { useCallback, useReducer } from "react";
 import { remove, concat, head } from "ramda";
-
-type IFile = FileWithProgress;
+import FileWithProgress from "./FileWithProgress";
 
 export type Progress = {
   total: number;
@@ -9,37 +8,15 @@ export type Progress = {
   done: boolean;
 };
 
-class FileWithProgress {
-  private _progress: Progress;
-  private _file: File;
-
-  constructor(
-    file: File,
-    { total = Infinity, loaded = 0, done = false }: Partial<Progress> = {}
-  ) {
-    this._file = file;
-    this._progress = { total, loaded, done };
-  }
-
-  get progress() {
-    return this._progress;
-  }
-
-  get file() {
-    return this._file;
-  }
-
-  isDone() {
-    return this._progress.total - this._progress.loaded <= 0;
-  }
-}
-
-type Action = { type: "ENQUEUE"; data: IFile[] } | { type: "NEXT" };
+type Action =
+  | { type: "ENQUEUE"; data: FileWithProgress[] }
+  | { type: "NEXT" }
+  | { type: "CLEAR_PROCESSED" };
 
 type State = {
-  current?: IFile;
-  processed: IFile[];
-  queue: IFile[];
+  current?: FileWithProgress;
+  processed: FileWithProgress[];
+  queue: FileWithProgress[];
 };
 
 function reducer(state: State, action: Action): State {
@@ -64,6 +41,13 @@ function reducer(state: State, action: Action): State {
         current: head(queue),
         processed: concat(processed, current ? [current] : []),
         queue: remove(0, 1, queue),
+      };
+    }
+
+    case "CLEAR_PROCESSED": {
+      return {
+        ...state,
+        processed: [],
       };
     }
 
@@ -93,6 +77,10 @@ export default function useFileQueue() {
     dispatch({ type: "NEXT" });
   }, []);
 
+  const cleanup = useCallback(() => {
+    dispatch({ type: "CLEAR_PROCESSED" });
+  }, []);
+
   const files = processed.concat(current ?? []).concat(queue);
 
   return {
@@ -102,6 +90,7 @@ export default function useFileQueue() {
     files,
     enqueue,
     dequeue,
+    cleanup,
     progress: {
       total: files.reduce((prev, current) => prev + current.file.size, 0),
       loaded: processed.reduce((prev, current) => prev + current.file.size, 0),
